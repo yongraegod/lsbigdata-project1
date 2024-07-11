@@ -158,9 +158,9 @@ window.Quarto = {
 <section id="실행가능한-코드-청크" class="level2">
 <h2 class="anchored" data-anchor-id="실행가능한-코드-청크">실행가능한 코드 청크</h2>
 <p>백틱 뒤에 <code>{python}</code>을 붙여주면 됨.</p>
-<div id="489d477f" class="cell" data-execution_count="1">
+<div id="e93d0599" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="op">+</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="45">
+<div class="cell-output cell-output-display" data-execution_count="73">
 <pre><code>2</code></pre>
 </div>
 </div>
@@ -172,9 +172,9 @@ window.Quarto = {
 <li><code>echo</code> 옵션: 코드를 문서에 보여줌</li>
 <li><code>eval</code> 옵션: 코드를 돌릴 것인가, 그냥 둘 것인가를 결정</li>
 </ul>
-<div id="f70e31dd" class="cell" data-execution_count="2">
+<div id="2ef0b9af" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="op">+</span><span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="46">
+<div class="cell-output cell-output-display" data-execution_count="74">
 <pre><code>2</code></pre>
 </div>
 </div>
@@ -191,8 +191,8 @@ window.Quarto = {
 \sqrt[5]{2}^{3}
 \]</span></p>
 <p>You can add options to executable code like this</p>
-<div id="1f3c181c" class="cell" data-execution_count="3">
-<div class="cell-output cell-output-display" data-execution_count="47">
+<div id="94e2bc11" class="cell" data-execution_count="3">
+<div class="cell-output cell-output-display" data-execution_count="75">
 <pre><code>4</code></pre>
 </div>
 </div>
@@ -234,7 +234,7 @@ window.Quarto = {
 <p>- 라고 누군가가 말했다, 2024</p>
 <p>인라인 코드: ‘print(“Hello, World!”)’</p>
 <p>코드 블록:</p>
-<div id="eb7ac17f" class="cell" data-execution_count="4">
+<div id="86ec28f0" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> greet():</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Hello, World!"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -243,8 +243,7 @@ window.Quarto = {
 <hr>
 <p>이것은 간단한 각주<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>입니다.</p>
 <p>두번째 각주 경우<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>입니다.</p>
-<p>이것은 세번째 각주자나<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>일걸??</p>
-<p>이것은 이름이 지정된 각주<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>.</p>
+<p>이것은 이름이 지정된 각주<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>.</p>
 </section>
 </section>
 </section>
@@ -257,6 +256,22 @@ window.Quarto = {
 <li><label><input type="checkbox" checked="">메일 확인</label></li>
 <li><label><input type="checkbox">밥 먹기</label></li>
 </ul>
+<blockquote class="blockquote">
+<p>[!note] 이것만 알아두세요! 옵시디언은 정말 편한 도구입니다.</p>
+</blockquote>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+이것만 알아두세요!
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>옵시디언은 정말 편한 도구입니다.</p>
+</div>
+</div>
 </section>
 </section>
 </section>
@@ -266,9 +281,9 @@ window.Quarto = {
 
 <ol>
 <li id="fn1"><p>이것은 참조된 텍스트입니다.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>두번째 각주자나. 왜 줄변경이 안되는고야.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>각주의 첫 줄입니다. 이것은 각주가 여러 줄에 걸쳐 작성될 때 사용하는 방법입니다.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn4"><p>이름이 지정된 각주는 여전히 숫자로 표시되지만, 참조를 더 쉽게 식별하고 연결할 수 있게 해줍니다.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>두번째 각주자나.<br>
+줄변경은 첫째줄 뒤에 공백 2개 넣어주기.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>이름이 지정된 각주는 여전히 숫자로 표시되지만, 참조를 더 쉽게 식별하고 연결할 수 있게 해줍니다.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main>
 <!-- /main column -->
