@@ -199,3 +199,4 @@ df = pd.DataFrame({'제품명': ['머그컵'],
 import numpy as np
 np
 
+dsa
