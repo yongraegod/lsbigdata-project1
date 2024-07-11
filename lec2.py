@@ -199,4 +199,4 @@ df = pd.DataFrame({'제품명': ['머그컵'],
 import numpy as np
 np
 
-#테스트~~d
+#테스트~~d hhh
