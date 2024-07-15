@@ -24,10 +24,8 @@ sum(x[::3])
 print(a)
 np.delete(a, [1,3])
 
-
 a > 3
 a[a>3]
-
 
 np.random.seed(2024)
 a = np.random.randint(1, 10000, 300)
@@ -112,17 +110,17 @@ a[my_index]
 import numpy as np
 a = np.array([20., np.nan, 13., 24., 309.])
 a + 3
-np.mean(a)
-np.nanmean(a)
-np.nan_to_num(a, nan = 150)
+np.mean(a) #nan이 있어 계산 안됨
+np.nanmean(a) #nan 빼고 계산
+np.nan_to_num(a, nan = 150) #nan 값에 150 부여
 
 #5.1.7.b 값이 없음을 나타내는 None
 a = None
 b = np.nan
 a
 b
-a + 1
-b + 1
+a + 1 #None은 오류 반환
+b + 1 #nan은 그냥 nan 반환
 np.isnan(a)
 
 #5.1.8 빈 칸을 제거하는 방법
