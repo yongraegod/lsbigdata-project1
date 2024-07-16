@@ -5,6 +5,7 @@ import numpy as np
 np.random.seed(2024)
 
 a = np.random.randint(1, 21, 10)
+a = np.random.choice(np.arange(1, 21), 10, False) #중복값 없이 뽑기
 print(a)
 
 # 두 번째 값 추출
