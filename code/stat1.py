@@ -40,3 +40,11 @@ def Z(num, p):
     return np.where(x < p_cumsum[0], 0, np.where( x < p_cumsum[1], 1, 2))
 p = np.array([0.2, 0.5, 0.3])
 Z(7, p)
+
+###########
+
+# E[X] = 1.5
+import numpy as np
+sum(np.arange(4) * np.array([1,2,2,1]) / 6)
+
+ 

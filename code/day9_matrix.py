@@ -108,7 +108,7 @@ print("이미지 첫 4x4 픽셀, 첫 번째 채널:\n", jelly[:4, :4, 0])
 
 len(jelly)
 jelly.shape
-jelly[:, :, 0].shape
+jelly[:, :, 0]
 jelly[:, :, 0].transpose().shape
 
 
@@ -158,10 +158,14 @@ my_array2.shape # (2,2,2,3) 2wkd
 
 p.22 넘파이 배열 기본 제공 함수들
 a = np.array([[1,2,3], [4,5,6]])
-a
+a.shape
+
+#ex)
+z = np.arange(36).reshape(3, 4, 3)
+z.sum(axis = 0)
 
 a.sum()
-a.sum(axis=0)
+a.sum(axis=0).shape
 a.sum(axis=1)
 
 a.mean()
@@ -203,21 +207,5 @@ d.clip(2,4)
 
 #배열을 리스트로 변환합니다.
 d.tolist()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
