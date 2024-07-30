@@ -13,7 +13,7 @@ raw_welfare = pd.read_spss('data/koweps/Koweps_hpwc14_2019_beta2.sav')
 welfare = raw_welfare.copy()
 welfare.shape
 welfare.info()
-welfare.describe()
+# welfare.describe()
 
 # 변수명 바꾸기
 welfare = welfare.rename(
@@ -40,7 +40,7 @@ welfare['sex'] = np.where(welfare['sex'] == 1, 'male', 'female')
 welfare['sex'].value_counts()
 ============================
 # 월급 변수 검토
-welfare['income'].describe()
+# welfare['income'].describe()
 welfare['income'].isna().sum()
 
 # 성별 월급 평균표 만들기
@@ -130,9 +130,10 @@ plt.clf()
 # 
 # # 결과 확인
 # print(welfare[['age', 'new_ageg']])
-# ------------------------------------------
+------------------------------------------
 # 나이대별 수입 분석(수업에서 사용)
-# cut
+# plt.rcParams.update({'font.family' : 'Malgun Gothic'}) # 한글 폰트 추가
+# cut 사용
 bin_cut = np.array([0,9,19,29,39,49,59,69,79,89,99,109,119])
 welfare = welfare.assign(age_group = pd.cut(welfare['age'],
                          bins = bin_cut,
@@ -144,18 +145,44 @@ age_income = welfare.dropna(subset = 'income') \
 
 sns.barplot(data = age_income, x = 'age_group', y = 'mean_income')
 
-plt.rcParams.update({'font.family' : 'Malgun Gothic'}) # 한글 폰트 추가
-
 plt.show()
 plt.clf()
-===============================================
-# 연령대 및 성별 월급 차이
-sex_income = welfare.dropna(subset = 'income') \
-                    .groupby(['ageg', 'sex'], as_index = False) \
-                    .agg(mean_income = ('income','mean'))
-sex_income
+----------------------------------------------
+# 판다스 데이터 프레임을 다룰 때, 변수의 타입이 카테고리로 설정되어 있는 경우,
+# groupby + agg 콤보가 안먹힘.
+# 그래서 object 타입으로 바꿔 준 후 수행
+welfare['age_group'] = welfare['age_group'].astype('object')
 
-sns.barplot(data = sex_income, x = 'ageg', y = 'mean_income', hue ='sex',\
-            order = ['young','middle','old'])
+sex_age_income = welfare.dropna(subset = 'income') \
+                        .groupby(['age_group', 'sex'], as_index = False) \
+                        .agg(mean_income = ('income','mean'))
+
+sns.barplot(data = sex_age_income, x = 'age_group', y = 'mean_income', hue ='sex')
 plt.show()
 plt.clf()
+----------------------------------------------
+# 연령대별, 성별 상위 4% 수입 찾아보기!
+# quantile
+# x = np.arange(10)
+# np.quantile(x, q=0.96) 96% 위치 값을 찾아줌
+
+sex_age_income = welfare.dropna(subset = 'income') \
+                        .groupby(['age_group', 'sex'], as_index = False) \
+                        .agg(top4per_income = ('income', lambda x: np.quantile(x, q=0.96)))
+sex_age_income
+
+
+-----------------------------------
+# 사용자 정의 함수
+def custom_mean(series, dropna = True):
+    if dropna:
+        return print(series, "hi")
+    else:
+        return print(series, "hello")
+
+
+
+
+
+
+
