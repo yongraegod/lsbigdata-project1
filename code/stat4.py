@@ -76,8 +76,6 @@ plt.axvline(4, color='green', linestyle ='--', linewidth=2)
 plt.axvline(a, color='blue', linestyle ='--', linewidth=1)
 plt.axvline(b, color='blue', linestyle ='--', linewidth=1)
 
-
-
 # 기댓값 표현
 plt.axvline(4, color='green', linestyle ='-', linewidth=2)
 

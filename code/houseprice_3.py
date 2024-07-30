@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 house_train = pd.read_csv("data/house_price/train.csv")
-house_train = house_train[["Id","YearBuilt","SalePrice"]]
+house_train = house_train[["Id","OverallQual","SalePrice"]]
 house_train.info()
 
 # 연도별 평균
