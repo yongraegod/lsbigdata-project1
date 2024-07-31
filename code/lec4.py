@@ -71,13 +71,13 @@ a[1:4]
 # 빈 배열 생성
 b = np.empty(3)
 b
-print("빈 벡터 생성하기:", x)
+print("빈 벡터 생성하기:", b)
 
 # 배열 채우기
 b[0] = 1
 b[1] = 7
 b[2] = 358
-print("채워진 벡터:", x)
+print("채워진 벡터:", b)
 b
 b[2]
 
@@ -116,7 +116,7 @@ np.repeat(vec4, 5)
 
 np.tile(vec4, 3)
 
-vec4 +vec4 #같은 위치끼리 연산
+vec4 + vec4 #같은 위치끼리 연산
 max(vec4)
 sum(vec4)
 
@@ -201,15 +201,4 @@ vector
 vector.shape
 result = matrix + vector
 result
-
-
-
-
-
-
-
-
-
-
-
 

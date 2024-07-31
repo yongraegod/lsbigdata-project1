@@ -153,7 +153,7 @@ mat_x.shape
 len(mat_x)
 
 my_array2 = np.array([my_array, my_array])
-my_array2.shape # (2,2,2,3) 2wkd 
+my_array2.shape # (2,2,2,3) 2장
 
 
 p.22 넘파이 배열 기본 제공 함수들

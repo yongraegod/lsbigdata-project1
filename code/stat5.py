@@ -4,7 +4,7 @@ import numpy as np
 np.random.seed(20240729)
 
 old_seat = np.arange(1,29)
-new_seat = np.random.choice(a,28,False)
+new_seat = np.random.choice(old_seat,28,False)
 
 result = pd.DataFrame({"old_seat": old_seat,
                        "new_seat": new_seat})
@@ -26,7 +26,7 @@ plt.clf()
 # y = x^2
 x = np.linspace(-8,8,100)
 y = x**2
-# plt.scatter(x,y,s=2,color="red")
+plt.scatter(x,y,s=6,color="red")
 plt.plot(x,y,color="blue")
 
 # x축, y축 범위 설정
@@ -41,7 +41,7 @@ plt.show()
 plt.clf()
 =========================================================
 # adp책 p.57 신뢰구간 구하기
-
+# 1) 모평균에 대한 95% 신뢰구간을 구하세요.
 # 2) 작년 남학생 3학년 전체 분포의 표준편차는 6kg 이었다고 합니다. 
 # 이 정보를 이번 년도 남학생 분포의 표준편차로 대체하여 모평균에 대한 90% 신뢰구간을 구하세요.
 x = np.array([79.1, 68.8, 62.0, 74.4, 71.0, 60.6, 98.5, 86.4, 73.0, 
@@ -54,10 +54,6 @@ z_005 = norm.ppf(0.95, loc=0, scale=1)
 
 x.mean() + z_005 *6 / np.sqrt(16)
 x.mean() - z_005 *6 / np.sqrt(16)
-
-# 1) 모평균에 대한 95% 신뢰구간을 구하세요.
-
-
 ==========================================================
 ## 몬테카를로 적분: 확률변수 기대값을 구할때
 # 표본을 많이 뽑은 후, 원하는 형태로 변형, 

@@ -36,9 +36,8 @@ economics['date2'] + pd.DateOffset(months=-1) #월에 뺄셈
 economics['date2'] + pd.DateOffset(years=1) #연에 덧셈
 
 #윤년 체크
-economics['date2'].dt.is_leap_year
-
-economics['year'] = economics['date2'].dt.year
+# economics['date2'].dt.is_leap_year
+# economics['year'] = economics['date2'].dt.year
 
 sns.lineplot(data = economics, x = 'year', y = 'unemploy')
 sns.scatterplot(data = economics, x = 'year', y = 'unemploy', s=2)

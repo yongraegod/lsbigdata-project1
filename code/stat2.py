@@ -40,8 +40,6 @@ plt.show()
 
 np.arange(33).sum()/33
 
-
-
 x = np.arange(33)
 sum(x) / 33
 sum((x-16) * 1/33)
