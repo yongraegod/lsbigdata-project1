@@ -171,14 +171,85 @@ sex_age_income = welfare.dropna(subset = 'income') \
                         .agg(top4per_income = ('income', lambda x: np.quantile(x, q=0.96)))
 sex_age_income
 
+sns.barplot(data = sex_age_income, x = 'age_group', y = 'top4per_income', hue ='sex')
+plt.show()
+plt.clf()
+===============================================
+# 9-6장
+welfare['code_job']
+welfare['code_job'].value_counts()
 
------------------------------------
-# 사용자 정의 함수
-def custom_mean(series, dropna = True):
-    if dropna:
-        return print(series, "hi")
-    else:
-        return print(series, "hello")
+# !pip install openpyxl
+list_job = pd.read_excel("data/koweps/Koweps_Codebook_2019.xlsx", sheet_name = '직종코드')
+list_job.head()
+
+# welfare에 list_job 결합하기
+welfare = welfare.merge(list_job, how = 'left', on = 'code_job')
+
+welfare.dropna(subset = ['job', 'income'])[['income', 'job']]
+
+# 직업별 월급 평균표 만들기
+job_income = welfare.dropna(subset = ['job', 'income']) \
+                    .groupby('job', as_index = False) \
+                    .agg(mean_income = ('income','mean'))
+job_income.head()
+
+# 직업별 월급 평균 Top 10 추출
+top10 = job_income.sort_values('mean_income', ascending = False).head(10)
+top10
+
+# 국문 폰트 설정
+import matplotlib.pyplot as plt
+plt.rcParams.update({'font.family' : 'Malgun Gothic'})
+
+# 막대 그래프 만들기
+sns.barplot(data = top10, x='mean_income', y='job', hue='job')
+plt.show()
+plt.clf()
+-----------------------------------------------
+# 통으로 하기
+df = welfare.dropna(subset=['job','income']) \
+            .query('sex=="female"') \              #query도 사용 가능함!!(9-7장 내용)
+            .groupby('job', as_index = False) \
+            .agg(mean_income = ('income','mean')) \
+            .sort_values('mean_income', ascending = False) \
+            .head(10)
+            
+# 막대 그래프 만들기
+sns.barplot(df, x='mean_income', y='job', hue='job')
+plt.tight_layout()
+plt.show()
+plt.clf()            
+===============================================
+## 9-8장(p.263)
+welfare.info()
+welfare["marriage_type"]
+df = welfare.query("marriage_type != 5") \
+            .groupby('religion', as_index = False) \
+            ["marriage_type"] \
+            .value_counts(normalize=True) # <- proportion을 구해줌!!(핵심)
+df
+-----------------------------------------------
+df.query('marriage_type == 1') \
+  .assign(proportion = df['proportion'] * 100) \
+  .round(1)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
