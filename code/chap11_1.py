@@ -183,14 +183,23 @@ result.plot(kind='scatter',
 plt.show()
 plt.clf()
 
-# sns로 표시
+# 서울 그래프 그리기
 import seaborn as sns
-
 sns.scatterplot(data=result,
-                x='x', y='y', hue='gu_name', s=2,
+                x='x', y='y', hue='gu_name', s=3,
+                palette = "viridis",
                 legend = False)
 plt.show()
 plt.clf()
 -------------------------------------------------------
 # 강남구 vs 강남구 아닌 그룹 차이를 두고 싶다,,,
+gangnam_df = result.assign(is_gangnam = np.where(result["gu_name"]=="강남구", "강남","안강남"))
+gangnam_df
 
+sns.scatterplot(data=gangnam_df,
+                x='x', y='y', hue='is_gangnam', s=5,
+                palette={"안강남":"grey", "강남":"red"},
+                legend = True)
+plt.show()
+plt.clf()
+gangnam_df['is_gangnam'].unique()
