@@ -81,7 +81,7 @@ fig.show()
 # 범주형 변수인 'species'를 더미 변수로 변환
 penguins_dummies = pd.get_dummies(penguins, 
                                   columns=['species'],
-                                  drop_first=True)
+                                  drop_first=False)
 penguins_dummies.columns
 penguins_dummies.iloc[:,-3:]
 
@@ -96,6 +96,27 @@ model.fit(x, y)
 model.coef_
 model.intercept_
 
+# 선형회귀 직선의 방정식
+# y = 0.2 * bill_lenght -1.93 * species_Chinstrap -5.1 * species_Gentoo + 10.56
+
+# species     island     bill_length_mm  ...  body_mass_g     sex  year
+# Adelie      Torgersen            39.5  ...       3800.0  female  2007
+# Chinstrap   Torgersen            40.5  ...       3800.0  female  2007
+# Gentoo      Torgersen            40.5  ...       3800.0  female  2007
+
+# x1,  x2, x3
+# 39.5, 0, 0
+# 40.5, 1, 0
+
+regline_y = model.predict(x)
+
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+sns.scatterplot(x=penguins["bill_length_mm"], y=regline_y, color = 'black')
+sns.scatterplot(x=penguins["bill_length_mm"], y=y, hue = penguins['species'], palette='deep')
+plt.show()
+plt.clf()
 
 
 
