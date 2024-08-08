@@ -8,7 +8,6 @@ import pandas as pd
 import numpy as np
 from palmerpenguins import load_penguins
 
-
 penguins = load_penguins()
 penguins.head()
 penguins['species'].unique()
@@ -20,6 +19,9 @@ fig = px.scatter(
     color="species",
     size_max=20  # 점 크기 최대값 설정
 )
+
+# 점의 투명도 설정
+fig.update_traces(marker=dict(opacity=0.6))
 
 # 레이아웃 업데이트
 fig.update_layout(
@@ -37,7 +39,7 @@ fig.update_layout(
         tickfont=dict(color="white"),
         gridcolor='rgba(255, 255, 255, 0.2)'  # 그리드 색깔 조정
     ),
-    legend=dict(title=dict(text="펭귄 종류", font=dict(color="white")), font=dict(color="white")),  # 범례 제목 한글로 변경
+    legend=dict(title=dict(text="펭귄 종류", font=dict(color="white"))),  # 범례 제목 한글로 변경
 )
 
 fig.show()
