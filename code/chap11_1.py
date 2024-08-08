@@ -203,3 +203,65 @@ sns.scatterplot(data=gangnam_df,
 plt.show()
 plt.clf()
 gangnam_df['is_gangnam'].unique()
+=======================================================
+import numpy as np
+import matplotlib.pyplot as plt
+import json
+
+geo_seoul = json.load(open("./data/bigfile/SIG_Seoul.geojson", encoding="UTF-8"))
+geo_seoul["features"][0]["properties"]
+
+df_pop = pd.read_csv("./data/Population_sig.csv")
+# df_pop.head()
+
+df_seoulpop = df_pop.iloc[1:26]
+df_seoulpop['code'] = df_pop['code'].astype(str)
+df_seoulpop.info()
+
+# 패키지 설치하기
+# !pip install folium
+import folium
+
+center_x = result['x'].mean()
+center_y = result['y'].mean()
+
+# p.304
+# 흰 도화지 맵 그리기
+my_map = folium.Map(location = [37.551, 126.973],
+                    zoom_start = 12,
+                    tiles='cartodbpositron')
+my_map.save('my_map.html')
+
+# Choropleth - 그리기
+folium.Choropleth(
+    geo_data = geo_seoul,
+    data = df_seoulpop,
+    columns = ('code', 'pop'),
+    key_on = 'feature.properties.SIG_CD').add_to(map_seoul)
+
+map_seoul.save('map_seoul.html')
+
+
+# 계급 구간 정하기
+bins = df_seoulpop['pop'].quantile([0, 0.2, 0.4, 0.6, 0.8, 1])
+bins = list(bins)
+
+folium.Choropleth(
+    geo_data = geo_seoul,
+    data = df_seoulpop,
+    columns = ('code', 'pop'),
+    fill_color = "viridis",
+    bins = bins,
+    key_on = 'feature.properties.SIG_CD').add_to(map_seoul)
+    
+map_seoul.save('map_seoul.html')
+
+# 점 찍는 법
+make_seouldf(0).iloc[:,1:3].mean() # 종로구의 중심점
+
+folium.Marker([37.583744, 126.983800]).add_to(map_seoul)
+map_seoul.save('map_seoul.html')
+
+
+
+
