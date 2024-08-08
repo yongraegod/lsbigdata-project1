@@ -1,8 +1,14 @@
+# plotly 라이브러리 모듈 로딩
+import plotly.graph_objects as go
+import plotly.express as px
+import pandas as pd
+import numpy as np
+
 # plotly.express 라이브러리 로딩
 import plotly.express as px
 
 # 데이터 패키지 설치
-!pip install palmerpenguins
+# !pip install palmerpenguins
 
 import pandas as pd
 import numpy as np
@@ -17,7 +23,8 @@ fig = px.scatter(
     x="bill_length_mm",
     y="bill_depth_mm",
     color="species",
-    size_max=20  # 점 크기 최대값 설정
+    size_max=20,  # 점 크기 최대값 설정
+    trendline = 'ols'
 )
 
 # 점의 투명도 설정
@@ -43,4 +50,52 @@ fig.update_layout(
 )
 
 fig.show()
+=================================================
+# 선형회귀 모델
+from sklearn.linear_model import LinearRegression
+
+model = LinearRegression()
+
+penguins = penguins.dropna() # Nan 제거
+
+x=penguins[["bill_length_mm"]]
+y=penguins["bill_depth_mm"]
+
+model.fit(x,y)
+model.coef_      # model 기울기
+model.intercept_ # model 절편
+linear_fit = model.predict(x)
+
+fig.add_trace(
+    go.Scatter(
+        mode="lines",
+        x=penguins["bill_length_mm"], y=linear_fit,
+        name="선형회귀직선",
+        line=dict(dash='dot', color='white')
+    )
+)
+
+fig.show()
+===============================================
+# 범주형 변수로 회귀분석 진행하기
+# 범주형 변수인 'species'를 더미 변수로 변환
+penguins_dummies = pd.get_dummies(penguins, 
+                                  columns=['species'],
+                                  drop_first=True)
+penguins_dummies.columns
+penguins_dummies.iloc[:,-3:]
+
+# x와 y 설정
+x = penguins_dummies[["bill_length_mm", "species_Chinstrap", "species_Gentoo"]]
+y = penguins_dummies["bill_depth_mm"]
+
+# 모델 학습
+model = LinearRegression()
+model.fit(x, y)
+
+model.coef_
+model.intercept_
+
+
+
 
