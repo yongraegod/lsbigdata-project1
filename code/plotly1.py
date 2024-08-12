@@ -1,4 +1,12 @@
-!pip install plotly
+# 현재 워킹 디렉토리 확인
+import os
+cwd = os.getcwd()
+cwd
+
+# 디렉토리 변경
+os.chdir('c:\\Users\\USER\\Documents\\LS빅데이터스쿨\\lsbigdata-project1')
+
+# !pip install plotly
 
 # plotly 라이브러리 모듈 로딩
 import plotly.graph_objects as go
@@ -140,3 +148,4 @@ fig = go.Figure(
 
 fig.show()
 ------------------
+

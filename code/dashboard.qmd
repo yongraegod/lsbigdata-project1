@@ -1,0 +1,102 @@
+---
+title: "팔머펭귄 대쉬보드"
+author: "yongraegod"
+format: 
+  dashboard:
+    logo: penguin_cover.png
+    nav-buttons:
+     - icon: github
+       href: https://github.com/yongraegod/lsbigdata-project1
+---
+
+# Page 1
+
+## {.sidebar}
+
+여기는 사이드 바에 대한 내용이 들어갈 곳 입니다.
+
+## 칼럼
+
+### 첫번째 {height=60%}
+
+```{python}
+# 패키지 설치 및 데이터 로드
+import plotly.express as px
+import pandas as pd
+import numpy as np
+from palmerpenguins import load_penguins
+
+penguins = load_penguins()
+# penguins.head()
+
+fig = px.scatter(
+    penguins,
+    x="bill_length_mm",
+    y="bill_depth_mm",
+    color="species",
+    size_max=20,  # 점 크기 최대값 설정
+    # trendline = 'ols'
+)
+
+fig.show()
+```
+
+### 두번째 {height=40%}
+
+#### Row {.tabset}
+
+```{python}
+from itables import show
+show(penguins, buttons = ['copy', 'excel', 'pdf'])
+```
+
+
+::: {.card title="My Title"}
+
+카드 안 텍스트
+
+![](penguin_cover.png)
+
+:::
+
+# Page 2
+
+## Row
+
+```{python}
+articles = 100
+comments = 50
+spam_num = 300
+```
+
+```{python}
+#| content: valuebox
+#| title: "Articles per day"
+#| icon: pencil
+#| color: primary
+dict(
+  value = articles
+)
+```
+
+```{python}
+#| content: valuebox
+#| title: "Comments per day"
+dict(
+  icon = "chat",
+  color = "primary",
+  value = comments
+)
+```
+
+```{python}
+#| content: valuebox
+#| title: "Spam per day"
+dict(
+  icon = "trash",
+  color = "danger",
+  value = spam_num
+)
+```
+
+## Row
