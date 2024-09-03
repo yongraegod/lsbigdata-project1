@@ -5,7 +5,6 @@ from sklearn.linear_model import Lasso
 from sklearn.model_selection import cross_val_score, KFold, GridSearchCV
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import mean_squared_error
-import os
 
 # 데이터 불러오기
 house_train = pd.read_csv("./data/house_price/train.csv")

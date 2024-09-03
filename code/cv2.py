@@ -28,9 +28,10 @@ kf = KFold(n_splits=5, shuffle=True, random_state=2024)
 
 def rmse(model):
     score = np.sqrt(-cross_val_score(model, X_poly, y, cv = kf,
-                                     scoring = "neg_mean_squared_error").mean())
+                                     n_jobs=-1, scoring = "neg_mean_squared_error").mean())
     return(score)
 
+# rmse() 함수 사용 예제
 lasso = Lasso(alpha=0.01)
 rmse(lasso)
 

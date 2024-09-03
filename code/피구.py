@@ -18,4 +18,4 @@ team1
 team2 = df.drop(team1.index)
 team2
 
-pd.concat([team1.reset_index(drop=True), team2.reset_index(drop=True)], axis=1)
+pd.concat([team1.reset_index(drop=True), team2.re])
