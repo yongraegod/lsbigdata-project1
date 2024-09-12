@@ -90,86 +90,41 @@ train_y=train_df["SalePrice"]
 ## test
 test_x=test_df.drop("SalePrice", axis=1)
 
-from sklearn.linear_model import ElasticNet
-from sklearn.ensemble import RandomForestRegressor
+
+from sklearn.tree import DecisionTreeRegressor
 from sklearn.model_selection import GridSearchCV
 
-eln_model= ElasticNet()
-rf_model= RandomForestRegressor(n_estimators=100)
+train_x.shape[0]
+btstrap_index1=np.random.choice(np.arange(1458), 1000, replace=True)
+bts_train_x1=train_x.iloc[btstrap_index1,:]
+bts_train_y1=np.array(train_y)[btstrap_index1]
 
-# 그리드 서치 for ElasticNet
+btstrap_index2=np.random.choice(np.arange(1458), 1458, replace=True)
+bts_train_x2=train_x.iloc[btstrap_index2,:]
+bts_train_y2=np.array(train_y)[btstrap_index2]
+
+
+model = DecisionTreeRegressor(random_state=42)
 param_grid={
-    'alpha': [0.1, 1.0, 10.0, 100.0],
-    'l1_ratio': [0, 0.1, 0.5, 1.0]
+    'max_depth': np.arange(7, 20, 1),
+    'min_samples_split': np.arange(10, 30, 1)
 }
 grid_search=GridSearchCV(
-    estimator=eln_model,
+    estimator=model,
     param_grid=param_grid,
     scoring='neg_mean_squared_error',
     cv=5
 )
-grid_search.fit(train_x, train_y)
-best_eln_model=grid_search.best_estimator_
-
-# 그리드 서치 for RandomForests
-param_grid={
-    'max_depth': [3, 5, 7],
-    'min_samples_split': [20, 10, 5],
-    'min_samples_leaf': [5, 10, 20, 30],
-    'max_features': ['sqrt', 'log2', None]
-}
-grid_search=GridSearchCV(
-    estimator=rf_model,
-    param_grid=param_grid,
-    scoring='neg_mean_squared_error',
-    cv=5
-)
-grid_search.fit(train_x, train_y)
+grid_search.fit(bts_train_x1, bts_train_y1)
 grid_search.best_params_
-best_rf_model=grid_search.best_estimator_
+bts_model1=grid_search.best_estimator_
 
-
-# 스택킹
-y1_hat=best_eln_model.predict(train_x) # test 셋에 대한 집값
-y2_hat=best_rf_model.predict(train_x) # test 셋에 대한 집값
-
-train_x_stack=pd.DataFrame({
-    'y1':y1_hat,
-    'y2':y2_hat
-})
-
-from sklearn.linear_model import Ridge
-
-rg_model = Ridge()
-param_grid={
-    'alpha': np.arange(0, 10, 0.01)
-}
-grid_search=GridSearchCV(
-    estimator=rg_model,
-    param_grid=param_grid,
-    scoring='neg_mean_squared_error',
-    cv=5
-)
-grid_search.fit(train_x_stack, train_y)
+grid_search.fit(bts_train_x2, bts_train_y2)
 grid_search.best_params_
-blander_model=grid_search.best_estimator_
+bts_model2=grid_search.best_estimator_
 
-blander_model.coef_
-blander_model.intercept_
+bts1_y=bts_model1.predict(test_x)
+bts2_y=bts_model2.predict(test_x)
+(bts1_y + bts2_y)/2
 
-pred_y_eln=best_eln_model.predict(test_x) # test 셋에 대한 집값
-pred_y_rf=best_rf_model.predict(test_x) # test 셋에 대한 집값
-
-test_x_stack=pd.DataFrame({
-    'y1': pred_y_eln,
-    'y2': pred_y_rf
-})
-
-pred_y=blander_model.predict(test_x_stack)
-
-# SalePrice 바꿔치기
-sub_df["SalePrice"] = pred_y
-sub_df
-
-# # csv 파일로 내보내기
-sub_df.to_csv("./data/house_price/sample_submission11.csv", index=False)
+# 평균

@@ -1,14 +1,16 @@
-pip install plotly
+# 상후가 했던 3차원 평면코드(자유롭게 돌리면서 보는 버전)
+
+# pip install plotly
 
 import numpy as np
 import pandas as pd
 import plotly.graph_objects as go
 from sklearn.linear_model import LinearRegression
 
-# 데이터 로드
-house_train = pd.read_csv("data/house_price/train.csv")
-house_test = pd.read_csv("data/house_price/test.csv")
-sub_df = pd.read_csv("./data/house_price/sample_submission.csv")
+# 데이터 로드(본인 데이터 저장 위치&이름 맞춰서 수정)
+house_train = pd.read_csv("../data/house_price/train.csv")
+house_test = pd.read_csv("../data/house_price/test.csv")
+sub_df = pd.read_csv("../data/house_price/sample_submission.csv")
 
 # 이상치 제거
 house_train = house_train.query('GrLivArea <= 4500')
